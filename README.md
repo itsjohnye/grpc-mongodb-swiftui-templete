@@ -47,3 +47,6 @@ protoc --grpc-swift_out=Client=true,Server=false:. \
 4. Swift Package Manager has already added the package dependency [gRPC-Swift](https://github.com/grpc/grpc-swift).
 
 5. Identical localhost:port, we use defualt localhost:50051 in this example.
+
+###License
+[WTFPL](https://github.com/itsjohnye/grpc-helloword-swiftui-client/blob/main/LICENSE)
