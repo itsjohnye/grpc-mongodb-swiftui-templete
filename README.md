@@ -1,5 +1,6 @@
 # grpc-helloword-swiftui-client
 
+<img width="150" src="https://github.com/itsjohnye/grpc-helloword-swiftui-client/blob/main/Screen%20Shot.png"/>
 
 The folowing content only shows the **client part** of gRPC *helloworld* example.
 The server part reference from offical gRPC site: [gRPC Go quickstart](https://grpc.io/docs/languages/go/quickstart/).
