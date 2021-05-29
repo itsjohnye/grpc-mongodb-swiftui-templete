@@ -1,4 +1,4 @@
-## grpc-helloword-swiftui-client
+# grpc-helloword-swiftui-client
 
 
 The folowing content only shows the **client part** of gRPC *helloworld* example.
@@ -48,5 +48,5 @@ protoc --grpc-swift_out=Client=true,Server=false:. \
 
 5. Identical localhost:port, we use defualt localhost:50051 in this example.
 
-###License
+## License
 [WTFPL](https://github.com/itsjohnye/grpc-helloword-swiftui-client/blob/main/LICENSE)
