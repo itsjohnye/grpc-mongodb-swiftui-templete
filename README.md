@@ -1,4 +1,4 @@
-# grpc-helloword-swiftui-client
+# grpc-helloworld-swiftui-client
 
 <img width="200" src="https://github.com/itsjohnye/grpc-helloword-swiftui-client/blob/main/Screen%20Shot.png"/>
 
