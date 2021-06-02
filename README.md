@@ -1,6 +1,6 @@
 # grpc-helloworld-swiftui-client
 
-<img width="200" src="https://github.com/itsjohnye/grpc-helloword-swiftui-client/blob/main/Screen%20Shot.png"/>
+<img width="200" src="https://github.com/itsjohnye/grpc-helloworld-swiftui-client/blob/main/Screen%20Shot.png"/>
 
 The folowing content only shows the **client part** of gRPC *helloworld* example.
 The server part reference from offical gRPC site: [gRPC Go quickstart](https://grpc.io/docs/languages/go/quickstart/).
@@ -50,4 +50,4 @@ protoc --grpc-swift_out=Client=true,Server=false:. \
 5. Identical localhost:port, we use defualt localhost:50051 in this example.
 
 ## License
-[WTFPL](https://github.com/itsjohnye/grpc-helloword-swiftui-client/blob/main/LICENSE)
+[WTFPL](https://github.com/itsjohnye/grpc-helloworld-swiftui-client/blob/main/LICENSE)
