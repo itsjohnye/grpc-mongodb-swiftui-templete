@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2552B70726D7EEB300F4CB6B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2552B70626D7EEB300F4CB6B /* ViewModel.swift */; };
 		25FADE84266217110082C098 /* SwiftUIClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FADE83266217110082C098 /* SwiftUIClientApp.swift */; };
 		25FADE86266217110082C098 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FADE85266217110082C098 /* ContentView.swift */; };
 		25FADE88266217120082C098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25FADE87266217120082C098 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2552B70626D7EEB300F4CB6B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		25FADE80266217110082C098 /* SwiftUIClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25FADE83266217110082C098 /* SwiftUIClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIClientApp.swift; sourceTree = "<group>"; };
 		25FADE85266217110082C098 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				25FADE95266217AE0082C098 /* protos */,
 				25FADE83266217110082C098 /* SwiftUIClientApp.swift */,
 				25FADE85266217110082C098 /* ContentView.swift */,
+				2552B70626D7EEB300F4CB6B /* ViewModel.swift */,
 				25FADE87266217120082C098 /* Assets.xcassets */,
 				25FADE8C266217120082C098 /* Info.plist */,
 				25FADE89266217120082C098 /* Preview Content */,
@@ -160,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2552B70726D7EEB300F4CB6B /* ViewModel.swift in Sources */,
 				25FADE98266217D20082C098 /* helloworld.grpc.swift in Sources */,
 				25FADE86266217110082C098 /* ContentView.swift in Sources */,
 				25FADE99266217D20082C098 /* helloworld.pb.swift in Sources */,
