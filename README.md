@@ -5,9 +5,9 @@
 The project shows the gRPC *helloworld* example with **iOS client** and **golang server**.
 The server part is referenced from offical gRPC site: [gRPC Go quickstart](https://grpc.io/docs/languages/go/quickstart/).
 
+## Logistics
 
-
-##### Run the server:
+#### Run the server:
 
 ```shell
 cd greeter-server
@@ -15,11 +15,11 @@ go mod tidy
 go run main.go
 ```
 
-##### And then run the SwiftUIClient XCode Project.
+#### And then run the SwiftUIClient XCode Project.
 
 
 
-##### Notes:
+## Notes:
 
 Using identical `.proto` file in both server and client side, if you want to run *helloworld*  in other gRPC supported language:
 
@@ -50,7 +50,7 @@ message HelloReply {
 } 
 ```
 
-##### Server-side Protocol Buffer generation:
+#### Server-side Protocol Buffer generation:
 
 ```shell
 cd greeter-server
@@ -59,7 +59,7 @@ protoc --go_out=. --go_opt=paths=source_relative \
     proto/helloworld.proto
 ```
 
-##### Client-side Protocol Buffer generation:
+#### Client-side Protocol Buffer generation:
 
 ```shell
 cd proto
