@@ -7,7 +7,7 @@ The server part is referenced from offical gRPC site: [gRPC Go quickstart](https
 
 ## Logistics
 
-#### Run the server:
+#### Run the server
 
 ```shell
 cd greeter-server
@@ -19,7 +19,7 @@ go run main.go
 
 
 
-## Notes:
+## Notes
 
 Using identical `.proto` file in both server and client side, if you want to run *helloworld*  in other gRPC supported language:
 
