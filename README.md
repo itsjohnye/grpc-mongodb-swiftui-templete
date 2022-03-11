@@ -77,4 +77,4 @@ Notably, we use ` localhost:50051` in this example.
 
 
 ## License
-[WTFPL](https://github.com/itsjohnye/grpc-helloworld-swiftui-client/blob/main/LICENSE)
+[MIT](https://github.com/itsjohnye/grpc-helloworld-swiftui-client/blob/main/LICENSE)
