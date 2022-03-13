@@ -21,7 +21,7 @@ go run main.go
 
 ## Notes
 
-Using identical `.proto` file in both server and client side, if you want to run *helloworld*  in other gRPC supported language。
+Using identical `.proto` file in both server and client side, if you want to run *helloworld*  in other gRPC supported language.
 
 #### Server-side Protocol Buffer generation:
 
