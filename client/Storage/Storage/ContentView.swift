@@ -44,7 +44,7 @@ struct ContentView: View {
                     }
                 }
             }
-             .navigationTitle("Docker compose single server")
+             .navigationTitle("Docker-compose single server")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
