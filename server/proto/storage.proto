@@ -1,0 +1,29 @@
+syntax = "proto3";
+package storage;
+
+option go_package = ".;storage";
+
+service Storage {
+     rpc GetProfile(GetProfileRequest) returns (GetProfileResponse) {}
+     rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
+}
+
+message GetProfileRequest {
+     string user_uuid = 1;
+}
+
+message GetProfileResponse {
+     string name = 1;
+     string habit = 2;
+}
+
+message UpdateProfileRequest {
+     string user_uuid = 1;
+     string name = 2;
+     string habit = 3;
+}
+
+message UpdateProfileResponse {
+     string name = 1;
+     string habit = 2;
+}

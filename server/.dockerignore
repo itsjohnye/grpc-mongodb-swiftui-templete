@@ -1,0 +1,14 @@
+# comment
+.git
+.gitignore
+
+output
+*.out
+*.log
+
+*/temp*
+*/*/temp*
+temp?
+
+*.md
+!README.md

@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  storage:
+    depends_on:
+      - mdb
+    links:
+      - "mdb"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 50051:50051
+    environment:
+      MONGODB_URI: mongodb://mdb:27017/
+
+  mdb:
+    image: mongo
+    volumes:
+      - mongo-data:/data/db
+    restart: unless-stopped
+
+  mongo-express:
+    image: mongo-express
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mdb:27017/
+
+volumes:
+  mongo-data:
+
