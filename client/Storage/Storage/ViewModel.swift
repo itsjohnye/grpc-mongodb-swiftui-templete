@@ -25,9 +25,10 @@ final class ViewModel: ObservableObject {
     
     //Combine
     private var cancellables = Set<AnyCancellable>()
+    
     //gRPC call
     let client = GRPCClientStub.shared.client
-    let callOptions = CallOptions(timeLimit: .timeout(.seconds(3)))    
+    let callOptions = CallOptions(timeLimit: .timeout(.seconds(3)))
     
     private var getProfilePublisher: AnyPublisher<Storage_GetProfileResponse, GRPCStatus> {
         Deferred{
@@ -40,7 +41,7 @@ final class ViewModel: ObservableObject {
                 call.response.whenSuccess{
                     promise(.success($0))
                 }
-              
+                
                 call.status.whenSuccess{
                     promise(.failure($0))
                 }
@@ -64,7 +65,7 @@ final class ViewModel: ObservableObject {
                 call.response.whenSuccess{
                     promise(.success($0))
                 }
-              
+                
                 call.status.whenSuccess{
                     promise(.failure($0))
                 }
@@ -114,10 +115,5 @@ final class ViewModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
-    
-    
-    
-    
-    
     
 }

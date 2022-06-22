@@ -10,42 +10,34 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var vm = ViewModel()
     var body: some View {
-        NavigationView {
-            Form {
+        Form {
+            Section(header: Text("Docker-compose single server").bold()){
                 Text("uuid: \(vm.uuid)")
-                Section(header: Text("Name").bold()){
-                    TextField("", text: $vm.name)
-                }
-                Section(header: Text("Habit").bold()){
-                    TextField("", text: $vm.habit)
-                }
-                
-                HStack {
-                    Spacer()
-                    Button("Get Profile", action: {
-                        vm.getProfile()
-                    })
-                    Spacer()
-                }
-                
-                HStack {
-                    Spacer()
-                    Button("Update Profile", action: {
-                        vm.updateProfile()
-                    })
-                    Spacer()
-                }
-                .alert(isPresented: $vm.isAlertPresented){
-                    switch vm.popupState {
-                    case .gRPCError(let status):
-                       return Alert(title: Text("gRPC Error"), message: Text("\(status.description)"), dismissButton: .cancel())
-                    case .none:
-                        return Alert(title: Text(""))
-                    }
-                }
             }
-             .navigationTitle("Docker-compose single server")
-            .navigationBarTitleDisplayMode(.inline)
+            
+            Section(header: Text("Name").bold()){
+                TextField("", text: $vm.name)
+            }
+            
+            Section(header: Text("Habit").bold()){
+                TextField("", text: $vm.habit)
+            }
+            
+            Button("Get Profile", action: {
+                vm.getProfile()
+            }).frame(maxWidth: .infinity, alignment: .center)
+            
+            Button("Update Profile", action: {
+                vm.updateProfile()
+            }).frame(maxWidth: .infinity, alignment: .center)
+        }
+        .alert(isPresented: $vm.isAlertPresented){
+            switch vm.popupState {
+            case .gRPCError(let status):
+                return Alert(title: Text("gRPC Error"), message: Text("\(status.description)"), dismissButton: .cancel())
+            case .none:
+                return Alert(title: Text(""))
+            }
         }
     }
 }

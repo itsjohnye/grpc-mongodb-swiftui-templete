@@ -15,7 +15,7 @@
 		25920FB127DB18B1004F6565 /* storage.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25920FAF27DB18B1004F6565 /* storage.pb.swift */; };
 		25920FB427DB1BE2004F6565 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 25920FB327DB1BE2004F6565 /* GRPC */; };
 		25920FB627DB1BF2004F6565 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25920FB527DB1BF2004F6565 /* ViewModel.swift */; };
-		25920FB827DB1CA9004F6565 /* GRPCService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25920FB727DB1CA9004F6565 /* GRPCService.swift */; };
+		25920FB827DB1CA9004F6565 /* GRPCClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25920FB727DB1CA9004F6565 /* GRPCClientStub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 		25920FAE27DB18B1004F6565 /* storage.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = storage.grpc.swift; sourceTree = "<group>"; };
 		25920FAF27DB18B1004F6565 /* storage.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = storage.pb.swift; sourceTree = "<group>"; };
 		25920FB527DB1BF2004F6565 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		25920FB727DB1CA9004F6565 /* GRPCService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRPCService.swift; sourceTree = "<group>"; };
+		25920FB727DB1CA9004F6565 /* GRPCClientStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRPCClientStub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +61,11 @@
 		25920F9E27DB1594004F6565 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				25920FB727DB1CA9004F6565 /* GRPCService.swift */,
+				25920FB727DB1CA9004F6565 /* GRPCClientStub.swift */,
 				25920FB527DB1BF2004F6565 /* ViewModel.swift */,
 				25920FA127DB1594004F6565 /* ContentView.swift */,
 				25920F9F27DB1594004F6565 /* StorageApp.swift */,
-				25920FAD27DB15AF004F6565 /* Proto */,
+				25920FAD27DB15AF004F6565 /* ProtocolBuffers */,
 				25920FA327DB1595004F6565 /* Assets.xcassets */,
 				25920FA527DB1595004F6565 /* Preview Content */,
 			);
@@ -80,13 +80,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		25920FAD27DB15AF004F6565 /* Proto */ = {
+		25920FAD27DB15AF004F6565 /* ProtocolBuffers */ = {
 			isa = PBXGroup;
 			children = (
 				25920FAE27DB18B1004F6565 /* storage.grpc.swift */,
 				25920FAF27DB18B1004F6565 /* storage.pb.swift */,
 			);
-			path = Proto;
+			path = ProtocolBuffers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,7 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25920FB627DB1BF2004F6565 /* ViewModel.swift in Sources */,
-				25920FB827DB1CA9004F6565 /* GRPCService.swift in Sources */,
+				25920FB827DB1CA9004F6565 /* GRPCClientStub.swift in Sources */,
 				25920FB127DB18B1004F6565 /* storage.pb.swift in Sources */,
 				25920FB027DB18B1004F6565 /* storage.grpc.swift in Sources */,
 				25920FA227DB1594004F6565 /* ContentView.swift in Sources */,
