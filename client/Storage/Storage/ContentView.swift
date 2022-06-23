@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  Storage
 //
-//  Created by John Ye on 2022/3/22.
+//  Created by John Ye on 2022/6/23.
 //
 
 import SwiftUI
@@ -23,18 +23,31 @@ struct ContentView: View {
                 TextField("", text: $vm.habit)
             }
             
-            Button("Get Profile", action: {
-                vm.getProfile()
+            Section(header: Text("async method")){
+            Button("Get profile with async", action: {
+                vm.getProfileWithAsync()
             }).frame(maxWidth: .infinity, alignment: .center)
             
-            Button("Update Profile", action: {
-                vm.updateProfile()
+            Button("Update profile with async", action: {
+                vm.updateProfileWithAsync()
             }).frame(maxWidth: .infinity, alignment: .center)
+            }
+            
+            Section(header: Text("nio method")){
+            Button("Get profile with nio", action: {
+                vm.getProfileWithNio()
+            }).frame(maxWidth: .infinity, alignment: .center)
+            
+            Button("Update profile with nio", action: {
+                vm.updateProfileWithNio()
+            }).frame(maxWidth: .infinity, alignment: .center)
+            }
+            
         }
         .alert(isPresented: $vm.isAlertPresented){
             switch vm.popupState {
-            case .gRPCError(let status):
-                return Alert(title: Text("gRPC Error"), message: Text("\(status.description)"), dismissButton: .cancel())
+            case .gotError(let error):
+                return Alert(title: Text("Error"), message: Text(error.localizedDescription), dismissButton: .cancel())
             case .none:
                 return Alert(title: Text(""))
             }
