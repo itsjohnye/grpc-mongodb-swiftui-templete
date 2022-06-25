@@ -6,7 +6,7 @@
       "location" : "https://github.com/grpc/grpc-swift",
       "state" : {
         "branch" : "main",
-        "revision" : "f822ce48a50bdf282844cbdc75dd060ac4fdd838"
+        "revision" : "d772b688d718c2eb29f99b535fc4d92ebba031c5"
       }
     },
     {

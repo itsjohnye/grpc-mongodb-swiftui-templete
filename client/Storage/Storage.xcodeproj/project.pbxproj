@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		255E12062867185A00421BB0 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 255E12052867185A00421BB0 /* GRPC */; };
 		25920FA027DB1594004F6565 /* StorageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25920F9F27DB1594004F6565 /* StorageApp.swift */; };
 		25920FA227DB1594004F6565 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25920FA127DB1594004F6565 /* ContentView.swift */; };
 		25920FA427DB1595004F6565 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25920FA327DB1595004F6565 /* Assets.xcassets */; };
 		25920FA727DB1595004F6565 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25920FA627DB1595004F6565 /* Preview Assets.xcassets */; };
 		25920FB027DB18B1004F6565 /* storage.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25920FAE27DB18B1004F6565 /* storage.grpc.swift */; };
 		25920FB127DB18B1004F6565 /* storage.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25920FAF27DB18B1004F6565 /* storage.pb.swift */; };
-		25920FB427DB1BE2004F6565 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 25920FB327DB1BE2004F6565 /* GRPC */; };
 		25920FB627DB1BF2004F6565 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25920FB527DB1BF2004F6565 /* ViewModel.swift */; };
 		25920FB827DB1CA9004F6565 /* GRPCClientStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25920FB727DB1CA9004F6565 /* GRPCClientStub.swift */; };
 /* End PBXBuildFile section */
@@ -35,7 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25920FB427DB1BE2004F6565 /* GRPC in Frameworks */,
+				255E12062867185A00421BB0 /* GRPC in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +106,7 @@
 			);
 			name = Storage;
 			packageProductDependencies = (
-				25920FB327DB1BE2004F6565 /* GRPC */,
+				255E12052867185A00421BB0 /* GRPC */,
 			);
 			productName = Storage;
 			productReference = 25920F9C27DB1594004F6565 /* Storage.app */;
@@ -137,7 +137,7 @@
 			);
 			mainGroup = 25920F9327DB1594004F6565;
 			packageReferences = (
-				25920FB227DB1BE2004F6565 /* XCRemoteSwiftPackageReference "grpc-swift" */,
+				255E12042867185A00421BB0 /* XCRemoteSwiftPackageReference "grpc-swift" */,
 			);
 			productRefGroup = 25920F9D27DB1594004F6565 /* Products */;
 			projectDirPath = "";
@@ -375,7 +375,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		25920FB227DB1BE2004F6565 /* XCRemoteSwiftPackageReference "grpc-swift" */ = {
+		255E12042867185A00421BB0 /* XCRemoteSwiftPackageReference "grpc-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/grpc/grpc-swift";
 			requirement = {
@@ -386,9 +386,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		25920FB327DB1BE2004F6565 /* GRPC */ = {
+		255E12052867185A00421BB0 /* GRPC */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 25920FB227DB1BE2004F6565 /* XCRemoteSwiftPackageReference "grpc-swift" */;
+			package = 255E12042867185A00421BB0 /* XCRemoteSwiftPackageReference "grpc-swift" */;
 			productName = GRPC;
 		};
 /* End XCSwiftPackageProductDependency section */
