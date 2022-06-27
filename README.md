@@ -12,7 +12,8 @@ classDiagram
 	class Server
 	Server : Golang
 	Server : MongoDB
-
+	Server : (Docker)
+	
 Server  < .. > iOS  : gRPC 
 ```
 
