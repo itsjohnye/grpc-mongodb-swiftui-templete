@@ -1,8 +1,24 @@
 # gRPC MongoDB SwiftUI templete
 
-<img width="200" src="./ScreenShot.png"/>
-
 The demo illustrates the Golang *gRPC* server with MongoDB database communicates with an iOS client.
+
+```mermaid
+classDiagram
+	direction RL
+	class iOS
+	iOS : SwiftUI
+	iOS : Combine
+	
+	class Server
+	Server : Golang
+	Server : MongoDB
+
+Server  < .. > iOS  : gRPC 
+```
+
+
+
+<img width="200" src="./ScreenShot.png"/>
 
 ## Logistics
 
