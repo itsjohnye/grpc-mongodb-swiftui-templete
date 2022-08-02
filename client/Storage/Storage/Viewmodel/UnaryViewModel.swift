@@ -12,15 +12,15 @@ import Combine
 import NIOHPACK
 
 @MainActor      //A singleton actor whose executor is equivalent to the main dispatch queue
-final class ViewModel: ObservableObject {
-    let uuid = "001"    //const
+final class UnaryViewModel: ObservableObject {
+    @AppStorage("useruuid") var uuid: String = ""
     @Published var name = ""
     @Published var habit = ""
-    @Published var isAlertPresented = false
+    @Published var isPopupPresented = false
     
     //Popup alert/message/diagrame
     enum PopupState {
-        case gotError(Error)
+        case gRPCError(String)
     }
     @Published var popupState: PopupState?
     
@@ -34,7 +34,7 @@ final class ViewModel: ObservableObject {
     
     //MARK: Async method
     func getProfileWithAsync() {
-        print("getProfileWithAsync function invoked")
+        print("getProfileWithAsync()")
         let req: Storage_GetProfileRequest = .with{
             $0.userUuid = self.uuid
         }
@@ -45,14 +45,14 @@ final class ViewModel: ObservableObject {
                 self.habit = response.habit
             } catch {
                 print(error)
-                self.popupState = .gotError(error)
-                self.isAlertPresented = true
+                self.popupState = .gRPCError("\(error)")
+                self.isPopupPresented = true
             }
         }
     }
     
     func updateProfileWithAsync()  {
-        print("updateProfileWithAsync function invoked")
+        print("updateProfileWithAsync()")
         let req: Storage_UpdateProfileRequest = .with{
             $0.userUuid = self.uuid
             $0.name = self.name
@@ -65,8 +65,8 @@ final class ViewModel: ObservableObject {
                 self.habit = response.habit
             } catch {
                 print(error)
-                self.popupState = .gotError(error)
-                self.isAlertPresented = true
+                self.popupState = .gRPCError("\(error)")
+                self.isPopupPresented = true
             }
         }
     }
@@ -74,7 +74,7 @@ final class ViewModel: ObservableObject {
 }
 
 //MARK: Nio with Combine method
-extension ViewModel {
+extension UnaryViewModel {
     private var getProfileWithNioPublisher: AnyPublisher<Storage_GetProfileResponse, GRPCStatus> {  //returns GRPCStatus which confirms to the Error protocol
         Deferred{       //Using Deferred wraps Future: Wait for the subscription before executing the closure to create the Publisher for the new Subscriber.
             Future<Storage_GetProfileResponse, GRPCStatus> { promise in //Here, a Publisher of type Future (asynchronous, one-time) is created.
@@ -120,18 +120,17 @@ extension ViewModel {
     }
     
     func getProfileWithNio() {
-        print("getProfileWithNio function invoked")
+        print("getProfileWithNio()")
         getProfileWithNioPublisher
             .sink(receiveCompletion: {completion in
                 switch completion {
                 case .failure(let status):
-                    self.popupState = .gotError(status)
-                    self.isAlertPresented = true
+                    self.popupState = .gRPCError(status.description)
+                    self.isPopupPresented = true
                 case .finished:
                     break
                 }
             }, receiveValue: { rec in
-                print("getProfile recived.")
                 self.name = rec.name
                 self.habit = rec.habit
                 
@@ -140,18 +139,17 @@ extension ViewModel {
     }
     
     func updateProfileWithNio()  {
-        print("updateProfileWithNio function invoked")
+        print("updateProfileWithNio()")
         updateProfileWithNioPublisher
             .sink(receiveCompletion: {completion in
                 switch completion {
                 case .failure(let status):
-                    self.popupState = .gotError(status)
-                    self.isAlertPresented = true
+                    self.popupState = .gRPCError(status.description)
+                    self.isPopupPresented = true
                 case .finished:
                     break
                 }
             }, receiveValue: { rec in
-                print("updateProfile recived.")
                 self.name = rec.name
                 self.habit = rec.habit
                 

@@ -40,6 +40,27 @@ internal protocol Storage_StorageClientProtocol: GRPCClient {
     _ request: Storage_UpdateProfileRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Storage_UpdateProfileRequest, Storage_UpdateProfileResponse>
+
+  func subscribe(
+    _ request: Storage_SubscribeRequest,
+    callOptions: CallOptions?,
+    handler: @escaping (Storage_ServerStreamResponse) -> Void
+  ) -> ServerStreamingCall<Storage_SubscribeRequest, Storage_ServerStreamResponse>
+
+  func unsubscribe(
+    _ request: Storage_UnsubscribeRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Storage_UnsubscribeRequest, Storage_UnsubscribeResponse>
+
+  func broadcast(
+    _ request: Storage_Greeting,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Storage_Greeting, Storage_Empty>
+
+  func bidiStream(
+    callOptions: CallOptions?,
+    handler: @escaping (Storage_BidiStreamResponse) -> Void
+  ) -> BidirectionalStreamingCall<Storage_BidiStreamRequest, Storage_BidiStreamResponse>
 }
 
 extension Storage_StorageClientProtocol {
@@ -47,7 +68,7 @@ extension Storage_StorageClientProtocol {
     return "storage.Storage"
   }
 
-  /// Unary call to GetProfile
+  ///Unary
   ///
   /// - Parameters:
   ///   - request: Request to send to GetProfile.
@@ -80,6 +101,84 @@ extension Storage_StorageClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUpdateProfileInterceptors() ?? []
+    )
+  }
+
+  ///Server streaming
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Subscribe.
+  ///   - callOptions: Call options.
+  ///   - handler: A closure called when each response is received from the server.
+  /// - Returns: A `ServerStreamingCall` with futures for the metadata and status.
+  internal func subscribe(
+    _ request: Storage_SubscribeRequest,
+    callOptions: CallOptions? = nil,
+    handler: @escaping (Storage_ServerStreamResponse) -> Void
+  ) -> ServerStreamingCall<Storage_SubscribeRequest, Storage_ServerStreamResponse> {
+    return self.makeServerStreamingCall(
+      path: Storage_StorageClientMetadata.Methods.subscribe.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSubscribeInterceptors() ?? [],
+      handler: handler
+    )
+  }
+
+  /// Unary call to Unsubscribe
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Unsubscribe.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func unsubscribe(
+    _ request: Storage_UnsubscribeRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Storage_UnsubscribeRequest, Storage_UnsubscribeResponse> {
+    return self.makeUnaryCall(
+      path: Storage_StorageClientMetadata.Methods.unsubscribe.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnsubscribeInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to Broadcast
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Broadcast.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func broadcast(
+    _ request: Storage_Greeting,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Storage_Greeting, Storage_Empty> {
+    return self.makeUnaryCall(
+      path: Storage_StorageClientMetadata.Methods.broadcast.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeBroadcastInterceptors() ?? []
+    )
+  }
+
+  ///Bidirectional streaming
+  ///
+  /// Callers should use the `send` method on the returned object to send messages
+  /// to the server. The caller should send an `.end` after the final message has been sent.
+  ///
+  /// - Parameters:
+  ///   - callOptions: Call options.
+  ///   - handler: A closure called when each response is received from the server.
+  /// - Returns: A `ClientStreamingCall` with futures for the metadata and status.
+  internal func bidiStream(
+    callOptions: CallOptions? = nil,
+    handler: @escaping (Storage_BidiStreamResponse) -> Void
+  ) -> BidirectionalStreamingCall<Storage_BidiStreamRequest, Storage_BidiStreamResponse> {
+    return self.makeBidirectionalStreamingCall(
+      path: Storage_StorageClientMetadata.Methods.bidiStream.path,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeBidiStreamInterceptors() ?? [],
+      handler: handler
     )
   }
 }
@@ -158,6 +257,25 @@ internal protocol Storage_StorageAsyncClientProtocol: GRPCClient {
     _ request: Storage_UpdateProfileRequest,
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Storage_UpdateProfileRequest, Storage_UpdateProfileResponse>
+
+  func makeSubscribeCall(
+    _ request: Storage_SubscribeRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncServerStreamingCall<Storage_SubscribeRequest, Storage_ServerStreamResponse>
+
+  func makeUnsubscribeCall(
+    _ request: Storage_UnsubscribeRequest,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Storage_UnsubscribeRequest, Storage_UnsubscribeResponse>
+
+  func makeBroadcastCall(
+    _ request: Storage_Greeting,
+    callOptions: CallOptions?
+  ) -> GRPCAsyncUnaryCall<Storage_Greeting, Storage_Empty>
+
+  func makeBidiStreamCall(
+    callOptions: CallOptions?
+  ) -> GRPCAsyncBidirectionalStreamingCall<Storage_BidiStreamRequest, Storage_BidiStreamResponse>
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -193,6 +311,52 @@ extension Storage_StorageAsyncClientProtocol {
       interceptors: self.interceptors?.makeUpdateProfileInterceptors() ?? []
     )
   }
+
+  internal func makeSubscribeCall(
+    _ request: Storage_SubscribeRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncServerStreamingCall<Storage_SubscribeRequest, Storage_ServerStreamResponse> {
+    return self.makeAsyncServerStreamingCall(
+      path: Storage_StorageClientMetadata.Methods.subscribe.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSubscribeInterceptors() ?? []
+    )
+  }
+
+  internal func makeUnsubscribeCall(
+    _ request: Storage_UnsubscribeRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Storage_UnsubscribeRequest, Storage_UnsubscribeResponse> {
+    return self.makeAsyncUnaryCall(
+      path: Storage_StorageClientMetadata.Methods.unsubscribe.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnsubscribeInterceptors() ?? []
+    )
+  }
+
+  internal func makeBroadcastCall(
+    _ request: Storage_Greeting,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncUnaryCall<Storage_Greeting, Storage_Empty> {
+    return self.makeAsyncUnaryCall(
+      path: Storage_StorageClientMetadata.Methods.broadcast.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeBroadcastInterceptors() ?? []
+    )
+  }
+
+  internal func makeBidiStreamCall(
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncBidirectionalStreamingCall<Storage_BidiStreamRequest, Storage_BidiStreamResponse> {
+    return self.makeAsyncBidirectionalStreamingCall(
+      path: Storage_StorageClientMetadata.Methods.bidiStream.path,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeBidiStreamInterceptors() ?? []
+    )
+  }
 }
 
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
@@ -218,6 +382,66 @@ extension Storage_StorageAsyncClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUpdateProfileInterceptors() ?? []
+    )
+  }
+
+  internal func subscribe(
+    _ request: Storage_SubscribeRequest,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncResponseStream<Storage_ServerStreamResponse> {
+    return self.performAsyncServerStreamingCall(
+      path: Storage_StorageClientMetadata.Methods.subscribe.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSubscribeInterceptors() ?? []
+    )
+  }
+
+  internal func unsubscribe(
+    _ request: Storage_UnsubscribeRequest,
+    callOptions: CallOptions? = nil
+  ) async throws -> Storage_UnsubscribeResponse {
+    return try await self.performAsyncUnaryCall(
+      path: Storage_StorageClientMetadata.Methods.unsubscribe.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnsubscribeInterceptors() ?? []
+    )
+  }
+
+  internal func broadcast(
+    _ request: Storage_Greeting,
+    callOptions: CallOptions? = nil
+  ) async throws -> Storage_Empty {
+    return try await self.performAsyncUnaryCall(
+      path: Storage_StorageClientMetadata.Methods.broadcast.path,
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeBroadcastInterceptors() ?? []
+    )
+  }
+
+  internal func bidiStream<RequestStream>(
+    _ requests: RequestStream,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncResponseStream<Storage_BidiStreamResponse> where RequestStream: Sequence, RequestStream.Element == Storage_BidiStreamRequest {
+    return self.performAsyncBidirectionalStreamingCall(
+      path: Storage_StorageClientMetadata.Methods.bidiStream.path,
+      requests: requests,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeBidiStreamInterceptors() ?? []
+    )
+  }
+
+  internal func bidiStream<RequestStream>(
+    _ requests: RequestStream,
+    callOptions: CallOptions? = nil
+  ) -> GRPCAsyncResponseStream<Storage_BidiStreamResponse> where RequestStream: AsyncSequence & Sendable, RequestStream.Element == Storage_BidiStreamRequest {
+    return self.performAsyncBidirectionalStreamingCall(
+      path: Storage_StorageClientMetadata.Methods.bidiStream.path,
+      requests: requests,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeBidiStreamInterceptors() ?? []
     )
   }
 }
@@ -248,6 +472,18 @@ internal protocol Storage_StorageClientInterceptorFactoryProtocol: GRPCSendable 
 
   /// - Returns: Interceptors to use when invoking 'updateProfile'.
   func makeUpdateProfileInterceptors() -> [ClientInterceptor<Storage_UpdateProfileRequest, Storage_UpdateProfileResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'subscribe'.
+  func makeSubscribeInterceptors() -> [ClientInterceptor<Storage_SubscribeRequest, Storage_ServerStreamResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'unsubscribe'.
+  func makeUnsubscribeInterceptors() -> [ClientInterceptor<Storage_UnsubscribeRequest, Storage_UnsubscribeResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'broadcast'.
+  func makeBroadcastInterceptors() -> [ClientInterceptor<Storage_Greeting, Storage_Empty>]
+
+  /// - Returns: Interceptors to use when invoking 'bidiStream'.
+  func makeBidiStreamInterceptors() -> [ClientInterceptor<Storage_BidiStreamRequest, Storage_BidiStreamResponse>]
 }
 
 internal enum Storage_StorageClientMetadata {
@@ -257,6 +493,10 @@ internal enum Storage_StorageClientMetadata {
     methods: [
       Storage_StorageClientMetadata.Methods.getProfile,
       Storage_StorageClientMetadata.Methods.updateProfile,
+      Storage_StorageClientMetadata.Methods.subscribe,
+      Storage_StorageClientMetadata.Methods.unsubscribe,
+      Storage_StorageClientMetadata.Methods.broadcast,
+      Storage_StorageClientMetadata.Methods.bidiStream,
     ]
   )
 
@@ -271,6 +511,30 @@ internal enum Storage_StorageClientMetadata {
       name: "UpdateProfile",
       path: "/storage.Storage/UpdateProfile",
       type: GRPCCallType.unary
+    )
+
+    internal static let subscribe = GRPCMethodDescriptor(
+      name: "Subscribe",
+      path: "/storage.Storage/Subscribe",
+      type: GRPCCallType.serverStreaming
+    )
+
+    internal static let unsubscribe = GRPCMethodDescriptor(
+      name: "Unsubscribe",
+      path: "/storage.Storage/Unsubscribe",
+      type: GRPCCallType.unary
+    )
+
+    internal static let broadcast = GRPCMethodDescriptor(
+      name: "Broadcast",
+      path: "/storage.Storage/Broadcast",
+      type: GRPCCallType.unary
+    )
+
+    internal static let bidiStream = GRPCMethodDescriptor(
+      name: "BidiStream",
+      path: "/storage.Storage/BidiStream",
+      type: GRPCCallType.bidirectionalStreaming
     )
   }
 }

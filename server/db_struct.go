@@ -7,7 +7,7 @@ import (
 // UserCollection is the DB for users, it's name is defined after main() function.
 var UserCollection *mongo.Collection
 
-//User写入DataBase
+//struct User write-in DB
 type User struct {
 	UUID  string `bson:"uuid"`
 	Name  string `bson:"name"`

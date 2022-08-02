@@ -4,10 +4,18 @@ package storage;
 option go_package = ".;storage";
 
 service Storage {
+     //Unary
      rpc GetProfile(GetProfileRequest) returns (GetProfileResponse) {}
      rpc UpdateProfile(UpdateProfileRequest) returns (UpdateProfileResponse) {}
+     //Server streaming
+     rpc Subscribe(SubscribeRequest) returns (stream ServerStreamResponse) {}
+     rpc Unsubscribe(UnsubscribeRequest) returns (UnsubscribeResponse) {}
+     rpc Broadcast(Greeting) returns (Empty) {}
+     //Bidirectional streaming
+     rpc BidiStream(stream BidiStreamRequest) returns (stream BidiStreamResponse) {}
 }
 
+//Unary RPC
 message GetProfileRequest {
      string user_uuid = 1;
 }
@@ -26,4 +34,42 @@ message UpdateProfileRequest {
 message UpdateProfileResponse {
      string name = 1;
      string habit = 2;
+}
+
+//Server Streaming RPC
+message SubscribeRequest {
+     string user_uuid = 1;         //client generated
+}
+
+message ServerStreamResponse {
+     string broadcast_message = 1;
+}
+
+message UnsubscribeRequest {
+     string user_uuid = 1;
+}
+
+message UnsubscribeResponse {
+     string unsubscribed_message = 1;
+}
+
+message Greeting {
+     string user_uuid = 1;
+     string message = 2;
+}
+
+message Empty {}
+
+//Bidirectional Streaming RPC
+message BidiStreamRequest {
+     string user_uuid = 1;
+     oneof action{
+          string login = 2;
+          string logout = 3;
+          string broadcast = 4;
+     }
+}
+
+message BidiStreamResponse {
+     string broadcast_message = 1;
 }
