@@ -10,7 +10,7 @@ classDiagram
 	iOS : Combine
 	iOS : gRPC-swift
 	
-	class Server(Go)
+	class Server
 	Server : gRPC Unary/ServerStream/BidiStream call
 	Server : MongoDB
 	Server : (Docker)
