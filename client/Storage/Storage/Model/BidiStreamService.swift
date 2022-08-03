@@ -61,11 +61,15 @@ final class BidiStreamService: ObservableObject {
                     }
                     try await group.waitForAll()
                 }
-            } catch {
-                print(error)
-                self.popupState = .gRPCError("\(error)")
-                self.isPopupPresented = true
-                self.isLoginForBroadcast = false
+            } catch (let error) {
+                if let err: GRPCStatus = error as? GRPCStatus {
+                    if err.code == .unavailable {       //handle different errors
+                        print("Error being ignored (.unavailable)")
+                    } else {
+                        self.popupState = .gRPCError("\(err)")
+                        self.isPopupPresented = true
+                    }
+                }
             }
         }
     }
@@ -103,23 +107,23 @@ final class BidiStreamService: ObservableObject {
         }
         
         Task{
-             do{
-                 try await withThrowingTaskGroup(of: Void.self) { group in
-                     // group1
-                     group.addTask {
-                         try await self.bidiStreamCall?.requestStream.send(req)
-                     }
-                     // group2
-                     group.addTask {
-                         try await self.endCall()
-                     }
-                     try await group.waitForAll()
-                 }
-              } catch {
-                 print(error)
-                 self.popupState = .gRPCError("\(error)")
-                 self.isPopupPresented = true
-             }
+            do{
+                try await withThrowingTaskGroup(of: Void.self) { group in
+                    // group1
+                    group.addTask {
+                        try await self.bidiStreamCall?.requestStream.send(req)
+                    }
+                    // group2
+                    group.addTask {
+                        try await self.endCall()
+                    }
+                    try await group.waitForAll()
+                }
+            } catch {
+                print(error)
+                self.popupState = .gRPCError("\(error)")
+                self.isPopupPresented = true
+            }
         }
         
     }

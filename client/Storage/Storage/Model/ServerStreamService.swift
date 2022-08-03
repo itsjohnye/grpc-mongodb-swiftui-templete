@@ -83,7 +83,7 @@ final class ServerStreamService: ObservableObject {
             } catch (let error) {
                 if let err: GRPCStatus = error as? GRPCStatus {
                     if err.code == .unavailable {       //handle different errors
-                        print("error ignore X")
+                        print("Error being ignored (.unavailable)")
                     } else {
                         self.popupState = .gRPCError("\(err)")
                         self.isPopupPresented = true
