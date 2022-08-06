@@ -10,7 +10,7 @@ service Storage {
      //Server streaming
      rpc Subscribe(SubscribeRequest) returns (stream ServerStreamResponse) {}
      rpc Unsubscribe(UnsubscribeRequest) returns (UnsubscribeResponse) {}
-     rpc Broadcast(Greeting) returns (Empty) {}
+     rpc Greeting(GreetingRequest) returns (Empty) {}
      //Bidirectional streaming
      rpc BidiStream(stream BidiStreamRequest) returns (stream BidiStreamResponse) {}
 }
@@ -53,7 +53,7 @@ message UnsubscribeResponse {
      string unsubscribed_message = 1;
 }
 
-message Greeting {
+message GreetingRequest {
      string user_uuid = 1;
      string message = 2;
 }

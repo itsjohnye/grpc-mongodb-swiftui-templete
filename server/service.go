@@ -161,7 +161,7 @@ func (s *server) Unsubscribe(ctx context.Context, req *pb.UnsubscribeRequest) (*
 	}, nil
 }
 
-func (s *server) Broadcast(ctx context.Context, req *pb.Greeting) (*pb.Empty, error) {
+func (s *server) Greeting(ctx context.Context, req *pb.GreetingRequest) (*pb.Empty, error) {
 	log.Println("Broadcast function invoked")
 	uid := req.GetUserUuid()
 	_, ok := s.ServerStreamConnectionPool[uid]
@@ -248,8 +248,8 @@ func (s *server) Run(ctx context.Context) error {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	go s.sendServerStreamBroadcasts()
-	go s.sendBidiStreamBroadcasts()
+	go s.serverStreamBroadcasts()
+	go s.bidiStreamBroadcasts()
 
 	go func() {
 		_ = srv.Serve(lis)
@@ -265,7 +265,7 @@ func (s *server) Run(ctx context.Context) error {
 	return nil
 }
 
-func (s *server) sendServerStreamBroadcasts() {
+func (s *server) serverStreamBroadcasts() {
 	for {
 		res := <-s.ServerStreamBroadcastChan
 		for clientUUID, conn := range s.ServerStreamConnectionPool {
@@ -293,7 +293,7 @@ func (s *server) sendServerStreamBroadcasts() {
 	}
 }
 
-func (s *server) sendBidiStreamBroadcasts() {
+func (s *server) bidiStreamBroadcasts() {
 	for {
 		res := <-s.BidiStreamBroadcastChan
 		for clientUUID, conn := range s.BidiStreamConnectionPool {

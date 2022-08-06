@@ -125,7 +125,6 @@ final class BidiStreamService: ObservableObject {
                 self.isPopupPresented = true
             }
         }
-        
     }
     
     func broadcast(){

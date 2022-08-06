@@ -31,8 +31,8 @@ struct ServerStreamView: View {
                     
                 }
                 Section(header: Text("message").bold()){
-                    TextField("", text: $service.message)
-                    Button("Broadcast", action: {
+                    TextField("enter a message for broadcast", text: $service.message)
+                    Button("Greet", action: {
                         service.broadcast()
                     }).frame(maxWidth: .infinity, alignment: .center)
                 }

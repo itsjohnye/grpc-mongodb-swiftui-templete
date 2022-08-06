@@ -29,9 +29,9 @@ struct BidiStreamView: View {
                 }
                 
                 Section(header: Text("message").bold()){
-                    TextField("enter message for broadcast", text: $service.message)
+                    TextField("enter a message for broadcast", text: $service.message)
                     
-                    Button("Broadcast", action: {
+                    Button("Greet", action: {
                         service.broadcast()
                     }).frame(maxWidth: .infinity, alignment: .center)
                 }

@@ -127,7 +127,7 @@ struct Storage_UnsubscribeResponse {
   init() {}
 }
 
-struct Storage_Greeting {
+struct Storage_GreetingRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -240,7 +240,7 @@ extension Storage_SubscribeRequest: @unchecked Sendable {}
 extension Storage_ServerStreamResponse: @unchecked Sendable {}
 extension Storage_UnsubscribeRequest: @unchecked Sendable {}
 extension Storage_UnsubscribeResponse: @unchecked Sendable {}
-extension Storage_Greeting: @unchecked Sendable {}
+extension Storage_GreetingRequest: @unchecked Sendable {}
 extension Storage_Empty: @unchecked Sendable {}
 extension Storage_BidiStreamRequest: @unchecked Sendable {}
 extension Storage_BidiStreamRequest.OneOf_Action: @unchecked Sendable {}
@@ -531,8 +531,8 @@ extension Storage_UnsubscribeResponse: SwiftProtobuf.Message, SwiftProtobuf._Mes
   }
 }
 
-extension Storage_Greeting: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".Greeting"
+extension Storage_GreetingRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".GreetingRequest"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "user_uuid"),
     2: .same(proto: "message"),
@@ -561,7 +561,7 @@ extension Storage_Greeting: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Storage_Greeting, rhs: Storage_Greeting) -> Bool {
+  static func ==(lhs: Storage_GreetingRequest, rhs: Storage_GreetingRequest) -> Bool {
     if lhs.userUuid != rhs.userUuid {return false}
     if lhs.message != rhs.message {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}

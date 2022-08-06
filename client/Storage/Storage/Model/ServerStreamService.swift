@@ -37,13 +37,13 @@ final class ServerStreamService: ObservableObject {
     func broadcast() {
         print("ServerStreamService - broadcast()")
         
-        let req: Storage_Greeting = .with{
+        let req: Storage_GreetingRequest = .with{
             $0.userUuid = self.uuid
             $0.message = self.message
         }
         Task{
             do{
-                _ = try await self.asyncClient.broadcast(req)
+                _ = try await self.asyncClient.greeting(req)
             } catch {
                 print(error)
                 self.popupState = .gRPCError("\(error)")
@@ -95,6 +95,7 @@ final class ServerStreamService: ObservableObject {
     
     func unsubscribe() {
         print("ServerStreamService - unsubscribe()")
+        self.isInServerStreaming = false
         let req: Storage_UnsubscribeRequest = .with{
             $0.userUuid = self.uuid
         }
@@ -105,7 +106,6 @@ final class ServerStreamService: ObservableObject {
                 print(resp)
                 self.subscribtionCall = nil
                 self.isSubscribed = false
-                self.isInServerStreaming = false
             } catch {
                 print(error)
                 self.popupState = .gRPCError("\(error)")

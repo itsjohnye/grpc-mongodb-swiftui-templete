@@ -28,7 +28,7 @@ type StorageClient interface {
 	//Server streaming
 	Subscribe(ctx context.Context, in *SubscribeRequest, opts ...grpc.CallOption) (Storage_SubscribeClient, error)
 	Unsubscribe(ctx context.Context, in *UnsubscribeRequest, opts ...grpc.CallOption) (*UnsubscribeResponse, error)
-	Broadcast(ctx context.Context, in *Greeting, opts ...grpc.CallOption) (*Empty, error)
+	Greeting(ctx context.Context, in *GreetingRequest, opts ...grpc.CallOption) (*Empty, error)
 	//Bidirectional streaming
 	BidiStream(ctx context.Context, opts ...grpc.CallOption) (Storage_BidiStreamClient, error)
 }
@@ -100,9 +100,9 @@ func (c *storageClient) Unsubscribe(ctx context.Context, in *UnsubscribeRequest,
 	return out, nil
 }
 
-func (c *storageClient) Broadcast(ctx context.Context, in *Greeting, opts ...grpc.CallOption) (*Empty, error) {
+func (c *storageClient) Greeting(ctx context.Context, in *GreetingRequest, opts ...grpc.CallOption) (*Empty, error) {
 	out := new(Empty)
-	err := c.cc.Invoke(ctx, "/storage.Storage/Broadcast", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/storage.Storage/Greeting", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -150,7 +150,7 @@ type StorageServer interface {
 	//Server streaming
 	Subscribe(*SubscribeRequest, Storage_SubscribeServer) error
 	Unsubscribe(context.Context, *UnsubscribeRequest) (*UnsubscribeResponse, error)
-	Broadcast(context.Context, *Greeting) (*Empty, error)
+	Greeting(context.Context, *GreetingRequest) (*Empty, error)
 	//Bidirectional streaming
 	BidiStream(Storage_BidiStreamServer) error
 	mustEmbedUnimplementedStorageServer()
@@ -172,8 +172,8 @@ func (UnimplementedStorageServer) Subscribe(*SubscribeRequest, Storage_Subscribe
 func (UnimplementedStorageServer) Unsubscribe(context.Context, *UnsubscribeRequest) (*UnsubscribeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Unsubscribe not implemented")
 }
-func (UnimplementedStorageServer) Broadcast(context.Context, *Greeting) (*Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Broadcast not implemented")
+func (UnimplementedStorageServer) Greeting(context.Context, *GreetingRequest) (*Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Greeting not implemented")
 }
 func (UnimplementedStorageServer) BidiStream(Storage_BidiStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method BidiStream not implemented")
@@ -266,20 +266,20 @@ func _Storage_Unsubscribe_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Storage_Broadcast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Greeting)
+func _Storage_Greeting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GreetingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(StorageServer).Broadcast(ctx, in)
+		return srv.(StorageServer).Greeting(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/storage.Storage/Broadcast",
+		FullMethod: "/storage.Storage/Greeting",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(StorageServer).Broadcast(ctx, req.(*Greeting))
+		return srv.(StorageServer).Greeting(ctx, req.(*GreetingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -330,8 +330,8 @@ var Storage_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Storage_Unsubscribe_Handler,
 		},
 		{
-			MethodName: "Broadcast",
-			Handler:    _Storage_Broadcast_Handler,
+			MethodName: "Greeting",
+			Handler:    _Storage_Greeting_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

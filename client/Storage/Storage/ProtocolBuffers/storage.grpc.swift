@@ -52,10 +52,10 @@ internal protocol Storage_StorageClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Storage_UnsubscribeRequest, Storage_UnsubscribeResponse>
 
-  func broadcast(
-    _ request: Storage_Greeting,
+  func greeting(
+    _ request: Storage_GreetingRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Storage_Greeting, Storage_Empty>
+  ) -> UnaryCall<Storage_GreetingRequest, Storage_Empty>
 
   func bidiStream(
     callOptions: CallOptions?,
@@ -143,21 +143,21 @@ extension Storage_StorageClientProtocol {
     )
   }
 
-  /// Unary call to Broadcast
+  /// Unary call to Greeting
   ///
   /// - Parameters:
-  ///   - request: Request to send to Broadcast.
+  ///   - request: Request to send to Greeting.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func broadcast(
-    _ request: Storage_Greeting,
+  internal func greeting(
+    _ request: Storage_GreetingRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Storage_Greeting, Storage_Empty> {
+  ) -> UnaryCall<Storage_GreetingRequest, Storage_Empty> {
     return self.makeUnaryCall(
-      path: Storage_StorageClientMetadata.Methods.broadcast.path,
+      path: Storage_StorageClientMetadata.Methods.greeting.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeBroadcastInterceptors() ?? []
+      interceptors: self.interceptors?.makeGreetingInterceptors() ?? []
     )
   }
 
@@ -268,10 +268,10 @@ internal protocol Storage_StorageAsyncClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> GRPCAsyncUnaryCall<Storage_UnsubscribeRequest, Storage_UnsubscribeResponse>
 
-  func makeBroadcastCall(
-    _ request: Storage_Greeting,
+  func makeGreetingCall(
+    _ request: Storage_GreetingRequest,
     callOptions: CallOptions?
-  ) -> GRPCAsyncUnaryCall<Storage_Greeting, Storage_Empty>
+  ) -> GRPCAsyncUnaryCall<Storage_GreetingRequest, Storage_Empty>
 
   func makeBidiStreamCall(
     callOptions: CallOptions?
@@ -336,15 +336,15 @@ extension Storage_StorageAsyncClientProtocol {
     )
   }
 
-  internal func makeBroadcastCall(
-    _ request: Storage_Greeting,
+  internal func makeGreetingCall(
+    _ request: Storage_GreetingRequest,
     callOptions: CallOptions? = nil
-  ) -> GRPCAsyncUnaryCall<Storage_Greeting, Storage_Empty> {
+  ) -> GRPCAsyncUnaryCall<Storage_GreetingRequest, Storage_Empty> {
     return self.makeAsyncUnaryCall(
-      path: Storage_StorageClientMetadata.Methods.broadcast.path,
+      path: Storage_StorageClientMetadata.Methods.greeting.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeBroadcastInterceptors() ?? []
+      interceptors: self.interceptors?.makeGreetingInterceptors() ?? []
     )
   }
 
@@ -409,15 +409,15 @@ extension Storage_StorageAsyncClientProtocol {
     )
   }
 
-  internal func broadcast(
-    _ request: Storage_Greeting,
+  internal func greeting(
+    _ request: Storage_GreetingRequest,
     callOptions: CallOptions? = nil
   ) async throws -> Storage_Empty {
     return try await self.performAsyncUnaryCall(
-      path: Storage_StorageClientMetadata.Methods.broadcast.path,
+      path: Storage_StorageClientMetadata.Methods.greeting.path,
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeBroadcastInterceptors() ?? []
+      interceptors: self.interceptors?.makeGreetingInterceptors() ?? []
     )
   }
 
@@ -479,8 +479,8 @@ internal protocol Storage_StorageClientInterceptorFactoryProtocol: GRPCSendable 
   /// - Returns: Interceptors to use when invoking 'unsubscribe'.
   func makeUnsubscribeInterceptors() -> [ClientInterceptor<Storage_UnsubscribeRequest, Storage_UnsubscribeResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'broadcast'.
-  func makeBroadcastInterceptors() -> [ClientInterceptor<Storage_Greeting, Storage_Empty>]
+  /// - Returns: Interceptors to use when invoking 'greeting'.
+  func makeGreetingInterceptors() -> [ClientInterceptor<Storage_GreetingRequest, Storage_Empty>]
 
   /// - Returns: Interceptors to use when invoking 'bidiStream'.
   func makeBidiStreamInterceptors() -> [ClientInterceptor<Storage_BidiStreamRequest, Storage_BidiStreamResponse>]
@@ -495,7 +495,7 @@ internal enum Storage_StorageClientMetadata {
       Storage_StorageClientMetadata.Methods.updateProfile,
       Storage_StorageClientMetadata.Methods.subscribe,
       Storage_StorageClientMetadata.Methods.unsubscribe,
-      Storage_StorageClientMetadata.Methods.broadcast,
+      Storage_StorageClientMetadata.Methods.greeting,
       Storage_StorageClientMetadata.Methods.bidiStream,
     ]
   )
@@ -525,9 +525,9 @@ internal enum Storage_StorageClientMetadata {
       type: GRPCCallType.unary
     )
 
-    internal static let broadcast = GRPCMethodDescriptor(
-      name: "Broadcast",
-      path: "/storage.Storage/Broadcast",
+    internal static let greeting = GRPCMethodDescriptor(
+      name: "Greeting",
+      path: "/storage.Storage/Greeting",
       type: GRPCCallType.unary
     )
 
