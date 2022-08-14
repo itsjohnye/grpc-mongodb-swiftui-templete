@@ -9,7 +9,9 @@ import SwiftUI
 
 //Unary RPC
 struct UnaryView: View {
+    
     @ObservedObject var vm = UnaryViewModel()
+    
     var body: some View {
         VStack {
             Text("gRPC Unary call")

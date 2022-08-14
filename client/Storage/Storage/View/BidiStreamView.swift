@@ -7,8 +7,11 @@
 
 import SwiftUI
 
+//Bidiretional-Streaming RPCs
 struct BidiStreamView: View {
+    
     @EnvironmentObject var service: BidiStreamService
+    
     var body: some View {
         VStack {
             Text("gRPC Bidirectional Streaming")

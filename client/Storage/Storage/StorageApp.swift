@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct StorageApp: App {
 
-    @StateObject private var serverStreamService = ServerStreamService()
+    @StateObject private var serverStreamService = ServerStreamService()    //the object that is used throughout the app
     @StateObject private var bidiStreamService = BidiStreamService()
     
     @Environment(\.scenePhase)var scenePhase

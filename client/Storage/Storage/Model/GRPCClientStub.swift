@@ -11,6 +11,7 @@ import NIO
 
 //This Stub theoretically runs through the entire program life-cycle
 final class GRPCClientStub{
+    
     @AppStorage("useruuid") var uuid: String = ""
     
     static let shared = GRPCClientStub()    //Singleton

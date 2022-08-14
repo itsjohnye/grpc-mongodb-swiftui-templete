@@ -8,11 +8,10 @@
 import SwiftUI
 import GRPC
 import Combine
-import NIO
-import NIOHPACK
 
 @MainActor
 final class ServerStreamService: ObservableObject {
+    
     @AppStorage("useruuid") var uuid: String = ""
     @AppStorage("isInServerStreaming") var isInServerStreaming: Bool = false
     @Published var message = ""

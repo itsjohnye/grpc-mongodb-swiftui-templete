@@ -11,6 +11,7 @@ import Combine
 
 @MainActor
 final class BidiStreamService: ObservableObject {
+    
     @AppStorage("useruuid") var uuid: String = ""
     @AppStorage("isInBidiStreaming") var isInBidiStreaming: Bool = false
     @Published var message = ""
